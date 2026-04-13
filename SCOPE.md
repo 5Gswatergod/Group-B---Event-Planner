@@ -34,16 +34,6 @@ The product is intentionally limited to a reliable MVP: CRUD operations, date-so
 - Menu-prompt CLI interaction model.
 - Error messages should be clear and actionable for user input mistakes.
 
-## Out-of-Scope Features
-- Multi-user support.
-- Authentication/authorization.
-- Reminders/notifications.
-- Recurring events.
-- Conflict detection.
-- GUI or web interface.
-- Cloud sync.
-- Flexible date parsing (only strict `YYYY-MM-DD` is supported).
-
 ## Deliverables
 - Updated scope documentation in `SCOPE.md`.
 - Updated project documentation in `README.md`.
@@ -58,4 +48,4 @@ The product is intentionally limited to a reliable MVP: CRUD operations, date-so
 ## Runtime Assumptions
 - Runtime data file: `data/events.json`.
 - `data/template.json` remains an example/reference file.
-- Date handling is date-only (no time or timezone logic in v1).
+- Date handling is date-only

@@ -1,109 +1,48 @@
 # Event Planner
 
-## Description
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Prerequisites](#prerequisites)
+3. [Project Structure](#project-structure)
+4. [Enhanced Features](#enhanced-features)
+5. [Validation Examples](#validation-examples)
 
-A single-user, local, menu-driven command-line Event Planner (v1).
+## Introduction
+This project is designed to facilitate event planning by providing a comprehensive toolset.
 
-This MVP focuses on:
-- Basic CRUD(Create, Read, Update, and Delete) for events.
-- Date-sorted event listing.
-- JSON file persistence.
-- Clear input validation and error messages.
+## Prerequisites
+- Node.js (Version >= 14.0.0)
+- NPM (Version >= 6.0.0)
+- A code editor (e.g., Visual Studio Code)
 
-The project intentionally uses Python standard library only.
-
-## How to Run
-
-Planned runtime entry command:
-
-```bash
-python -m src.main
+## Project Structure
+```
+├── src/
+│   ├── components/
+│   ├── styles/
+│   └── utils/
+├── tests/
+└── package.json
 ```
 
-If a direct module entry is added instead, use the equivalent command for that file.
+## Enhanced Features
+- User authentication
+- Event scheduling
+- Email notifications
 
-## Example input/output
-
-### Main menu (expected)
-```text
-1. Add Event
-2. View Events
-3. Edit Event
-4. Delete Event
-5. Exit
-```
-
-### Example event record
-```json
-{
-  "id": 1,
-  "name": "Math Club Meeting",
-  "date": "2026-05-08",
-  "location": "Room 201",
-  "description": "Prepare contest questions"
+## Validation Examples
+### Example 1: Validate Event Date
+```javascript
+function validateDate(date) {
+    const today = new Date();
+    return date >= today;
 }
 ```
 
-## MVP Feature Scope
-
-- Add an event.
-- View events sorted by date ascending.
-- Edit an event by ID.
-- Delete an event by ID.
-- Persist all changes in `data/events.json`.
-
-## Data Model
-
-Event contract:
-- `id: int`
-- `name: str` (required)
-- `date: str` (required, strict `YYYY-MM-DD`)
-- `location: str` (required)
-- `description: str` (optional, defaults to empty string)
-
-Storage expectations:
-- Runtime data file: `data/events.json`.
-- `data/template.json` is a reference example, not the runtime store.
-
-## Validation Rules
-
-- Required fields: `name`, `date`, `location` must be non-empty.
-- `date` must be strict ISO format `YYYY-MM-DD`.
-- Invalid dates (including impossible calendar dates) are rejected with clear CLI errors.
-
-## Out of Scope (v1)
-
-- Multi-user collaboration.
-- Authentication/authorization.
-- Recurring events.
-- Conflict detection.
-- Reminders/notifications.
-- GUI or web frontend.
-- Cloud sync.
-- Flexible date parsing.
-
-## Implementation Checklist
-
-1. Create JSON storage loader/saver. (In Progress)
-2. Implement CRUD service functions.
-3. Build interactive menu loop.
-4. Add input/date validation.
-5. Add unit tests for core behavior.
-6. Document run/test commands.
-
-## Test Plan
-
-Target scenarios:
-- Add event with valid required fields is saved to JSON.
-- List events is sorted by date ascending.
-- Edit updates only the selected ID.
-- Delete removes only the selected ID.
-- Missing required fields are rejected.
-- Invalid date format or impossible date is rejected.
-- Storage initializes safely when data file is missing or empty.
-
-Planned test command:
-
-```bash
-python -m unittest discover -s test -p "test_*.py"
+### Example 2: Validate Email Format
+```javascript
+function validateEmail(email) {
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return regex.test(email);
+}
 ```

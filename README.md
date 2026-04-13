@@ -5,7 +5,7 @@
 A single-user, local, menu-driven command-line Event Planner (v1).
 
 This MVP focuses on:
-- Basic CRUD(Create, Read, Update, and Delet) for events.
+- Basic CRUD(Create, Read, Update, and Delete) for events.
 - Date-sorted event listing.
 - JSON file persistence.
 - Clear input validation and error messages.
@@ -84,7 +84,7 @@ Storage expectations:
 
 ## Implementation Checklist
 
-1. Create JSON storage loader/saver.
+1. Create JSON storage loader/saver. (In Progress)
 2. Implement CRUD service functions.
 3. Build interactive menu loop.
 4. Add input/date validation.

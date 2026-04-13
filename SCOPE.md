@@ -5,7 +5,7 @@ Event Planner is a single-user, local, command-line application for managing per
 The product is intentionally limited to a reliable MVP: CRUD operations, date-sorted viewing, and JSON file persistence.
 
 ## Target User(s)
-- One personal user (student-level use).
+- One personal user.
 - No account system.
 - No collaboration or shared event ownership.
 

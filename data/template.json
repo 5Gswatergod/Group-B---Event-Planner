@@ -1,6 +1,16 @@
-{
-    "name": "Example Event",
-    "description": "This is an example event description.",
-    "date": "2024-07-01",
-    "location": "Example Venue"
-}
+[
+  {
+    "id": 1,
+    "name": "Math Club Meeting",
+    "date": "2026-05-08",
+    "location": "Room 201",
+    "description": "Prepare contest questions"
+  },
+  {
+    "id": 2,
+    "name": "Doctor Appointment",
+    "date": "2026-05-10",
+    "location": "City Clinic",
+    "description": ""
+  }
+]

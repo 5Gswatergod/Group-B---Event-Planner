@@ -11,7 +11,6 @@ class EventPlanner:
     def __init__(self):
         self._events = []
 
-
     # HELPER METHODS
     def _is_valid_event(self,new_event):
         if isinstance(new_event,Event):
@@ -44,8 +43,11 @@ class EventPlanner:
     def get_all_events(self):
         return self._events
         
+    def get_event_count(self):
+        return len(self._events)
+    
     def display_list(self):
-        if len(self._events) == 0:
+        if self.get_event_count() == 0:
             print("Current No Events.")
 
         else:

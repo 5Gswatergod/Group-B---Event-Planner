@@ -43,7 +43,7 @@ class Event:
             return True
         
     def _is_valid_date_string(self,new_date):
-        if len(new_date) == 8 and self._is_valid_int(new_date):
+        if len(new_date) == 8 and new_date.isdigit():
             return True    
 
     # Name
@@ -60,6 +60,8 @@ class Event:
     def set_date(self,new_date):
         if self._is_valid_date_string(new_date):
             self._date = new_date
+        else:
+            raise ValueError("Invalid Event Date.")
     
     def get_date(self):
         return self._date
@@ -71,10 +73,9 @@ class Event:
     def get_status(self):
         return self._status
     
-
     # Display single Event
     def _is_upcoming_or_past(self):
-        if self.status == True:
+        if self._status == True:
             return "Upcoming"
         else:
             return "Past"
@@ -82,4 +83,4 @@ class Event:
     def __str__(self):
         date = self._date[:4] + " / " + self._date[4:6] + " / " + self._date[6:]
         status = self._is_upcoming_or_past()
-        
+        return f"[{status}] {self._name} - {date}"

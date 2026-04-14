@@ -4,7 +4,7 @@ from src.storage import load_events, save_events
 from src.validation import validate_event_input
 
 
-def get_next_id(events: list[dict[str, Any]]) -> int:
+def get_next_id(events: list[dict[str, Any]]):
     """
     Return the next available integer ID.
     """
@@ -16,7 +16,7 @@ def add_event(
     date: str,
     location: str,
     description: str = "",
-) -> dict[str, Any]:
+):
     """
     Create and save a new event.
     """
@@ -36,7 +36,7 @@ def add_event(
     return new_event
 
 
-def list_events() -> list[dict[str, Any]]:
+def list_events():
     """
     Return all events sorted by date ascending, then by ID ascending.
     """
@@ -44,7 +44,7 @@ def list_events() -> list[dict[str, Any]]:
     return sorted(events, key=lambda event: (event["date"], event["id"]))
 
 
-def find_event_by_id(event_id: int) -> dict[str, Any] | None:
+def find_event_by_id(event_id: int):
     """
     Find and return an event by ID, or None if not found.
     """
@@ -61,7 +61,7 @@ def edit_event(
     date: str,
     location: str,
     description: str = "",
-) -> dict[str, Any]:
+):
     """
     Update an existing event by ID.
     Raises ValueError if event is not found.
@@ -81,7 +81,7 @@ def edit_event(
     raise ValueError(f"Event with ID {event_id} was not found.")
 
 
-def delete_event(event_id: int) -> dict[str, Any]:
+def delete_event(event_id: int):
     """
     Delete an existing event by ID.
     Raises ValueError if event is not found.

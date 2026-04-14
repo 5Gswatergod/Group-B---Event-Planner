@@ -11,9 +11,6 @@
 
 
 class Event:
-    # Class Method
-    _event_count = 0
-
     def __init__(self,name:str,date:str,status:bool):
         # upcoming: True 
         # Past: False
@@ -21,13 +18,6 @@ class Event:
         self._name = name
         self._date = date
         self._status = status
-
-        Event._event_count += 1
-
-    # Get count
-    @classmethod
-    def get_event_count(cls):
-        return cls._event_count
 
     # Helper Methods  
     def _is_valid_int(self,num):

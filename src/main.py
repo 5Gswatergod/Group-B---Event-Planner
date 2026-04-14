@@ -15,7 +15,7 @@ from src.service import add_event, delete_event, edit_event, find_event_by_id, l
 Event = dict[str, Any]
 
 
-def print_menu() -> None:
+def print_menu():
     print("\nEvent Planner")
     print("1. Add event")
     print("2. View events")
@@ -24,20 +24,51 @@ def print_menu() -> None:
     print("5. Exit")
 
 
-def prompt_event_id() -> int:
-    raw_id = input("Enter event ID: ").strip()
+def prompt_non_empty(prompt_text: str, field_name: str):
+    while True:
+        value = input(prompt_text).strip()
+        if value:
+            return value
+        print(f"{field_name} cannot be empty. Please try again.")
 
-    if not raw_id.isdigit() or int(raw_id) <= 0:
-        raise ValueError("ID must be a positive integer.")
 
-    return int(raw_id)
+def prompt_event_id():
+    while True:
+        raw_id = input("Enter event ID: ").strip()
+
+        if not raw_id:
+            print("ID cannot be empty. Please try again.")
+            continue
+
+        if not raw_id.isdigit() or int(raw_id) <= 0:
+            print("ID must be a positive integer. Please try again.")
+            continue
+
+        return int(raw_id)
+
+
+def prompt_yes_no(prompt_text: str):
+    while True:
+        choice = input(prompt_text).strip().lower()
+
+        if not choice:
+            print("Response cannot be empty. Enter 'y' or 'n'.")
+            continue
+
+        if choice in {"y", "yes"}:
+            return True
+
+        if choice in {"n", "no"}:
+            return False
+
+        print("Invalid response. Enter 'y' or 'n'.")
 
 
 def prompt_event_fields(existing: Event | None = None):
     if existing is None:
-        name = input("Name: ")
-        date = input("Date (YYYY-MM-DD): ")
-        location = input("Location: ")
+        name = prompt_non_empty("Name: ", "Name")
+        date = prompt_non_empty("Date (YYYY-MM-DD): ", "Date")
+        location = prompt_non_empty("Location: ", "Location")
         description = input("Description (optional): ")
         return name, date, location, description
 
@@ -119,8 +150,8 @@ def handle_delete_event():
     print("\nDelete Event")
     event_id = prompt_event_id()
 
-    confirm = input(f"Delete event ID {event_id}? (y/N): ").strip().lower()
-    if confirm != "y":
+    confirm = prompt_yes_no(f"Delete event ID {event_id}? (y/n): ")
+    if not confirm:
         print("Delete cancelled.")
         return
 
@@ -145,6 +176,10 @@ def run_cli():
         except (EOFError, KeyboardInterrupt):
             print("\nGoodbye.")
             return
+
+        if not choice:
+            print("Choice cannot be empty. Please try again.")
+            continue
 
         if choice == "5":
             print("Goodbye.")

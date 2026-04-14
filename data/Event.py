@@ -71,6 +71,6 @@ class Event:
             return "Past"
         
     def __str__(self):
-        date = self._date[:4] + " / " + self._date[4:6] + " / " + self._date[6:]
+        date = self._date[:2] + " / " + self._date[2:4] + " / " + self._date[4:]
         status = self._is_upcoming_or_past()
         return f"[{status}] {self._name} - {date}"

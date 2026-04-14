@@ -4,13 +4,11 @@
 
 A single-user, local, menu-driven command-line Event Planner (v1).
 
-This MVP focuses on:
+This program focuses on:
 - Basic CRUD(Create, Read, Update, and Delet) for events.
 - Date-sorted event listing.
 - JSON file persistence.
 - Clear input validation and error messages.
-
-The project intentionally uses Python standard library only.
 
 ## How to Run
 
@@ -20,11 +18,9 @@ Planned runtime entry command:
 python -m src.main
 ```
 
-If a direct module entry is added instead, use the equivalent command for that file.
-
 ## Example input/output
 
-### Main menu (expected)
+### Main menu
 ```text
 1. Add Event
 2. View Events
@@ -44,7 +40,7 @@ If a direct module entry is added instead, use the equivalent command for that f
 }
 ```
 
-## MVP Feature Scope
+## In the Scope
 
 - Add an event.
 - View events sorted by date ascending.
@@ -70,17 +66,6 @@ Storage expectations:
 - Required fields: `name`, `date`, `location` must be non-empty.
 - `date` must be strict ISO format `YYYY-MM-DD`.
 - Invalid dates (including impossible calendar dates) are rejected with clear CLI errors.
-
-## Out of Scope (v1)
-
-- Multi-user collaboration.
-- Authentication/authorization.
-- Recurring events.
-- Conflict detection.
-- Reminders/notifications.
-- GUI or web frontend.
-- Cloud sync.
-- Flexible date parsing.
 
 ## Implementation Checklist
 

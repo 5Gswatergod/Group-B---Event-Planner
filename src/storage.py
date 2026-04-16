@@ -28,10 +28,13 @@ def save_event(file, event):
         ValueError: if the file is not a .txt file, or event is invalid.
         FileNotFoundError: if the file does not exist.
     '''
-    # Verify file existence
-    if not os.path.exists(file):
-        raise FileNotFoundError(f"File not found: {file}")
     
+    # Verify file existence, create if not.
+    if not os.path.exists(file):
+        os.makedirs(os.path.dirname(file) or '.', exist_ok=True)
+        with open(file, 'w') as f:
+            f.write('[]\n')
+
     # Verify file type
     if not file.endswith(".txt"):
         raise ValueError("File must be a .txt file.")

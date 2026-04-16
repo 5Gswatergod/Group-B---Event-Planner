@@ -1,3 +1,16 @@
+'''
+Purpose of this file:
+- Provides functions to save and load event data to/from a .txt file.
+
+Features:
+- Save a single event (as a dict) to a .txt file.
+- Load all stored events from a .txt file as a list of dicts.
+- Validates file path and event structure before any read/write operation.
+
+Authors: Group B
+Date: 2026-04-15
+'''
+
 import os
 
 def save_event(file, event):

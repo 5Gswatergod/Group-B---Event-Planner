@@ -5,7 +5,7 @@
 # Allow the user to mark an event as upcoming or past.
 # Save event data so that they are still available when the program is run again.
 
-from Event import Event
+from event import Event
 
 class EventPlanner:
     def __init__(self):

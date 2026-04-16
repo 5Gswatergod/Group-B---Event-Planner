@@ -11,8 +11,8 @@ Date: 2026-04-15
 '''
 
 import os
-from Event import Event
-from Storage import save_event, load_event
+from event import Event
+from storage import save_event, load_event
 
 FILE_PATH = "./data/saved_events.txt"
 

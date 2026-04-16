@@ -1,8 +1,8 @@
 import os
 
-def store_event(file, event):
+def save_event(file, event):
     '''
-    Stores an event into a .txt file.
+    Saves an event into a .txt file.
 
     Parameters:
         file (str): path to the .txt file where events are stored

@@ -22,19 +22,27 @@ class Event:
     # Helper Methods  
     def _is_valid_int(self,num):
         if isinstance(num,int) and num >0:
-            return True       
+            return True   
+        else:
+            return False    
         
     def _is_valid_flt(self,num):
         if isinstance(num,float) and num >=0:
             return True    
+        else:
+            return False
         
     def _is_valid_string(self,string):
         if isinstance(string,str) and string.strip() !="":
             return True
+        else:
+            return False
         
     def _is_valid_date_string(self,new_date):
         if len(new_date) == 8 and new_date.isdigit():
-            return True    
+            return True 
+        else:
+            return False   
 
     # Name
     def set_name(self,new_name):

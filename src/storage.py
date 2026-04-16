@@ -1,57 +1,87 @@
-import json
+'''
+Purpose of this file:
+- Provides functions to save and load event data to/from a .txt file.
+
+Features:
+- Save a single event (as a dict) to a .txt file.
+- Load all stored events from a .txt file as a list of dicts.
+- Validates file path and event structure before any read/write operation.
+
+Authors: Group B
+Date: 2026-04-15
+'''
+
 import os
-from typing import Any
 
+def save_event(file, event):
+    '''
+    Saves an event into a .txt file.
 
-DATA_FILE = os.path.join("data", "events.json")
+    Parameters:
+        file (str): path to the .txt file where events are stored
+        event (dict): must contain exactly 3 keys — name (str), date (str), status (str)
 
+    Returns:
+        True if the event was stored successfully.
 
-def ensure_data_dir() -> None:
-    """Ensure the data directory exists."""
-    os.makedirs(os.path.dirname(DATA_FILE), exist_ok=True)
+    Raises:
+        ValueError: if the file is not a .txt file, or event is invalid.
+        FileNotFoundError: if the file does not exist.
+    '''
+    # Verify file existence
+    if not os.path.exists(file):
+        raise FileNotFoundError(f"File not found: {file}")
+    
+    # Verify file type
+    if not file.endswith(".txt"):
+        raise ValueError("File must be a .txt file.")
 
+    # Verify data type
+    if not isinstance(event, dict):
+        raise TypeError("Event must be a dictionary.")
+    
+    # Verify data structure
+    if len(event) != 3:
+        raise ValueError("Event must be a dict with exactly 3 elements.")
 
-def load_events() -> list[dict[str, Any]]:
-    """
-    Load events from the JSON file.
+    # Read existing events from file
+    with open(file, "r") as f:
+        events = f.read()
+    
+    # Text -> Data conversion
+    events = eval(events) if events else []
 
-    Rules:
-    - If file does not exist, return an empty list.
-    - If file is empty, return an empty list.
-    - If JSON is invalid, raise ValueError.
-    - If root JSON is not a list, raise ValueError.
-    """
-    ensure_data_dir()
+    # Update list of events and overwrite file
+    with open(file, "w") as f:
+        events.append(event)
+        f.write(f"{events}\n")
+    
+    return True
 
-    if not os.path.exists(DATA_FILE):
-        return []
+def load_event(file):
+    '''
+    Loads an event from a .txt file.
 
-    with open(DATA_FILE, "r", encoding="utf-8") as file:
-        raw = file.read().strip()
+    Parameters:
+        file (str): path to the .txt file where events are stored
 
-    if not raw:
-        return []
+    Returns:
+        list: list of dicts containing event information.
 
-    try:
-        data = json.loads(raw)
-    except json.JSONDecodeError as exc:
-        raise ValueError("events.json is corrupted or contains invalid JSON.") from exc
+    Raises:
+        ValueError: if the file is not a .txt file.
+        FileNotFoundError: if the file does not exist.
+    '''
+    # Verify file existence
+    if not os.path.exists(file):
+        raise FileNotFoundError(f"File not found: {file}")
+    
+    # Verify file type
+    if not file.endswith(".txt"):
+        raise ValueError("File must be a .txt file.")
 
-    if not isinstance(data, list):
-        raise ValueError("events.json root must be a JSON array.")
-
-    return data
-
-
-def save_events(events: list[dict[str, Any]]) -> None:
-    """
-    Save events to the JSON file using atomic write.
-    """
-    ensure_data_dir()
-
-    temp_file = DATA_FILE + ".tmp"
-
-    with open(temp_file, "w", encoding="utf-8") as file:
-        json.dump(events, file, ensure_ascii=False, indent=2)
-
-    os.replace(temp_file, DATA_FILE)
+    # Read existing events from file and return as list of dicts
+    with open(file, "r") as f:
+        events = f.read()
+    events = eval(events) if events else []
+    return events

@@ -1,7 +1,7 @@
 from typing import Any
 
-from src.storage import load_events, save_events
-from src.validation import validate_event_input
+from src_backup.storage import load_events, save_events
+from src_backup.validation import validate_event_input
 
 
 def get_next_id(events: list[dict[str, Any]]):

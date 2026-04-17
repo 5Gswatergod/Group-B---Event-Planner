@@ -12,7 +12,7 @@ Date: 2026-04-15
 
 import os
 
-from event import Event
+from Event import Event
 from storage import save_event, load_event, eventToDict
 
 FILE_PATH = "./data/saved_events.txt"

@@ -15,7 +15,7 @@ import os
 from event import Event
 from storage import save_event, load_event, eventToDict
 
-FILE_PATH = "../data/saved_events.txt"
+FILE_PATH = "./data/saved_events.txt"
 
 def display_list(events: list[Event]) -> None:
     """Print the current event list in a numbered format."""
@@ -77,7 +77,8 @@ def main() -> None:
         print("5. Exit")
 
         choice = input("Choose an Option: ")
-
+        
+        # Collect input then append to list
         if choice == "1":
             event_name = get_valid_name()
             event_date = get_valid_date()
@@ -109,7 +110,8 @@ def main() -> None:
                     print("Event Removed.")
                 except (ValueError, IndexError):
                     print("Invalid input.")
-
+        
+        # Save before exit is handled in choice 5
         elif choice == "5":
             save_event(FILE_PATH, eventToDict(events))
             print("Goodbye.")

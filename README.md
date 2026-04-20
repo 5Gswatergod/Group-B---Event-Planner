@@ -10,10 +10,10 @@ All events are saved to a `.txt` file so they can be loaded again when the progr
 ## How to Run
 
 1. Make sure all files (`main.py`, `event.py`, `storage.py`) are in the same folder  
-2. Run the program using:
+2. Run the program using: python main.py
 
 ```bash
-python main.py
+
 Example Input/Output
 
 Menu:

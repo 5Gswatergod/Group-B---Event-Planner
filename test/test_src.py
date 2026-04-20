@@ -91,7 +91,7 @@ class StorageTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp_dir:
             file_path = os.path.join(temp_dir, "events.txt")
             with self.assertRaises(TypeError):
-                storage.save_event(file_path, "not an event")
+                storage.save_event(file_path, "not an event") #type:ignore
 
     def test_save_event_rejects_wrong_extension(self):
         with tempfile.TemporaryDirectory() as temp_dir:

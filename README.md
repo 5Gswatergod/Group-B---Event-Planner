@@ -13,25 +13,25 @@ All events are saved to a `.txt` file so they can be loaded again when the progr
 2. Run the program using: python main.py
 
 
-# Example Input/Output
+## Example Input/Output
 
 ## Menu:
----
-##--- Event Planner ---
+
+## --- Event Planner ---
 `1. Add Event
 2. View All Events
 3. Mark Event Status
 4. Remove Event
 5. Exit`
 ---
-##Example input:
+## Example input:
 
 `Choose an Option: 1
 Enter Event Name: Meeting
 Enter Event Date: (YYYYMMDD) 20260420
 Upcoming OR Past? (u/p) u`
 
-##Example output:
+## Example output:
 
 `[Upcoming] Meeting - 2026 / 04 / 20`
 

@@ -28,66 +28,62 @@ Menu:
 Example 1: Add Event
 
 Input:
-
 Choose an Option: 1
 Enter Event Name: Math Test
 Enter Event Date: (YYYYMMDD) 20260508
 Upcoming OR Past? (u/p) u
 
-Output:
-
-[Upcoming] Math Test - 2026 / 05 / 08
-
 Example 2: View Events
 
-Output:
+Input:
+Choose an Option: 2
 
+Output:
 1. [Upcoming] Math Test - 2026 / 05 / 08
-2. [Past] English Essay - 2026 / 04 / 15
 
 Example 3: Update Event Status
 
 Input:
-
 Choose an Option: 3
-Enter The event index: 1
-Upcoming OR Past? (u/p) p
+Upcoming OR Past? (u/p)p
 
 Output:
-
+1. [Upcoming] Math Test - 2026 / 05 / 08
+Enter The event index: 1
 Status Updated.
-
-Updated List:
-
-1. [Past] Math Test - 2026 / 05 / 08
 
 Example 4: Remove Event
 
 Input:
-
 Choose an Option: 4
 Enter The event index: 1
 
 Output:
-
 Event Removed.
 
-Example 5: Invalid Input
+Example 5: Invalid Event name
 
 Input:
-
 Choose an Option: 1
 Enter Event Name:
 
 Output:
-
 Invalid Name. Enter Again.
 
 Example 6: Empty Event List
 
 Output:
-
 Current No Events.
+
+Example 7: Invalid date
+
+Input:
+Enter Event Name: 1
+Enter Event Date: (YYYYMMDD) 88888888
+
+Output:
+Invalid date. Enter a real date in YYYYMMDD format.
+
 
 
 

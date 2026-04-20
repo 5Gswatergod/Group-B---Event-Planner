@@ -225,3 +225,4 @@ $RECYCLE.BIN/
 saved_events.txt
 events.json
 template.json
+.DS_Store

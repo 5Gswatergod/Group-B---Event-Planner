@@ -1,94 +1,38 @@
-# Event Planner
+# Event Planner App
 
 ## Description
+This program is a simple Event Planner written in Python.  
+It allows users to create, view, update, and delete events. Each event includes a name, date (YYYYMMDD), and status (Upcoming or Past).  
+All events are saved to a `.txt` file so they can be loaded again when the program runs.
 
-A single-user, local, menu-driven command-line Event Planner (v1).
-
-This program focuses on:
-- Basic CRUD(Create, Read, Update, and Delet) for events.
-- Date-sorted event listing.
-- JSON file persistence.
-- Clear input validation and error messages.
+---
 
 ## How to Run
 
-Planned runtime entry command:
+1. Make sure all files (`main.py`, `event.py`, `storage.py`) are in the same folder  
+2. Run the program using: python main.py
 
 ```bash
-python -m src.main
-```
 
-## Example input/output
+Example Input/Output
 
-### Main menu
-```text
+Menu:
+
+--- Event Planner ---
 1. Add Event
-2. View Events
-3. Edit Event
-4. Delete Event
+2. View All Events
+3. Mark Event Status
+4. Remove Event
 5. Exit
-```
 
-### Example event record
-```json
-{
-  "id": 1,
-  "name": "Math Club Meeting",
-  "date": "2026-05-08",
-  "location": "Room 201",
-  "description": "Prepare contest questions"
-}
-```
+Example input:
 
-## In the Scope
+Choose an Option: 1
+Enter Event Name: Meeting
+Enter Event Date: (YYYYMMDD) 20260420
+Upcoming OR Past? (u/p) u
 
-- Add an event.
-- View events sorted by date ascending.
-- Edit an event by ID.
-- Delete an event by ID.
-- Persist all changes in `data/events.json`.
+Example output:
 
-## Data Model
+[Upcoming] Meeting - 2026 / 04 / 20
 
-Event contract:
-- `id: int`
-- `name: str` (required)
-- `date: str` (required, strict `YYYY-MM-DD`)
-- `location: str` (required)
-- `description: str` (optional, defaults to empty string)
-
-Storage expectations:
-- Runtime data file: `data/events.json`.
-- `data/template.json` is a reference example, not the runtime store.
-
-## Validation Rules
-
-- Required fields: `name`, `date`, `location` must be non-empty.
-- `date` must be strict ISO format `YYYY-MM-DD`.
-- Invalid dates (including impossible calendar dates) are rejected with clear CLI errors.
-
-## Implementation Checklist
-
-1. Create JSON storage loader/saver.
-2. Implement CRUD service functions.
-3. Build interactive menu loop.
-4. Add input/date validation.
-5. Add unit tests for core behavior.
-6. Document run/test commands.
-
-## Test Plan
-
-Target scenarios:
-- Add event with valid required fields is saved to JSON.
-- List events is sorted by date ascending.
-- Edit updates only the selected ID.
-- Delete removes only the selected ID.
-- Missing required fields are rejected.
-- Invalid date format or impossible date is rejected.
-- Storage initializes safely when data file is missing or empty.
-
-Planned test command:
-
-```bash
-python -m unittest discover -s test -p "test_*.py"
-```

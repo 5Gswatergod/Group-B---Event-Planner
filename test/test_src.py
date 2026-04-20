@@ -134,6 +134,12 @@ class MainHelperTests(unittest.TestCase):
     def test_date_helper_returns_true_for_valid_date(self):
         self.assertTrue(main._is_valid_date_string("20260416"))
 
+    def test_date_helper_rejects_impossible_date(self):
+        self.assertFalse(main._is_valid_date_string("20260230"))
+
+    def test_date_helper_accepts_leap_day(self):
+        self.assertTrue(main._is_valid_date_string("20240229"))
+
     def test_get_valid_name_retries_until_valid_input(self):
         with patch("builtins.input", side_effect=["", "Meeting"]):
             output = io.StringIO()
@@ -150,7 +156,11 @@ class MainHelperTests(unittest.TestCase):
                 result = main.get_valid_date()
 
         self.assertEqual(result, "20260416")
-        self.assertIn("Invalid date. Enter Again.", output.getvalue())
+        self.assertIn("Invalid date. Enter a real date in YYYYMMDD format.", output.getvalue())
+
+    def test_get_valid_date_strips_extra_spaces(self):
+        with patch("builtins.input", return_value=" 20260416 "):
+            self.assertEqual(main.get_valid_date(), "20260416")
 
     def test_get_event_index_returns_zero_based_index(self):
         events = [Event("Meeting", "20260416", True)]

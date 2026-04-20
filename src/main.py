@@ -11,6 +11,7 @@ Date: 2026-04-15
 """
 
 import os
+from datetime import datetime
 
 from event import Event
 from storage import save_event, load_event, eventToDict
@@ -29,9 +30,20 @@ def _is_valid_string(string: str) -> bool | None:
     if isinstance(string, str) and string.strip() != "":
         return True
 
-def _is_valid_date_string(new_date: str) -> bool | None:
-    if len(new_date) == 8 and new_date.isdigit():
-        return True
+def _is_valid_date_string(new_date: str) -> bool:
+    if not isinstance(new_date, str):
+        return False
+
+    cleaned_date = new_date.strip()
+    if len(cleaned_date) != 8 or not cleaned_date.isdigit():
+        return False
+
+    try:
+        datetime.strptime(cleaned_date, "%Y%m%d")
+    except ValueError:
+        return False
+
+    return True
 
 def get_valid_name() -> str:
     while True:
@@ -42,10 +54,10 @@ def get_valid_name() -> str:
 
 def get_valid_date() -> str:
     while True:
-        date = input("Enter Event Date: (YYYYMMDD)")
+        date = input("Enter Event Date: (YYYYMMDD) ").strip()
         if _is_valid_date_string(date):
             return date
-        print("Invalid date. Enter Again.")
+        print("Invalid date. Enter a real date in YYYYMMDD format.")
 
 def get_event_index(events: list[Event]) -> int:
     display_list(events)

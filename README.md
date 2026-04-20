@@ -1,94 +1,83 @@
-# Event Planner
+# Event Planner App
 
-## Description
+## Overview
+This is a simple Event Planner application written in Python.  
+It allows users to create, view, update, and delete events. All events are saved to a `.txt` file so they can be loaded again later.
 
-A single-user, local, menu-driven command-line Event Planner (v1).
+---
 
-This program focuses on:
-- Basic CRUD(Create, Read, Update, and Delet) for events.
-- Date-sorted event listing.
-- JSON file persistence.
-- Clear input validation and error messages.
+## Features
+
+- Add a new event (name, date, status)
+- View all events in a numbered list
+- Update an event’s status (Upcoming or Past)
+- Remove an event
+- Save and load events from a file
+
+---
+
+## File Structure
+
+- `main.py` → Main program (user interface)
+- `event.py` → Defines the Event class
+- `storage.py` → Handles saving and loading data
+- `data/saved_events.txt` → Stores event data
+
+---
 
 ## How to Run
 
-Planned runtime entry command:
+1. Make sure all files are in the same folder
+2. Run the program:
 
 ```bash
-python -m src.main
-```
-
-## Example input/output
-
-### Main menu
-```text
+python main.py
+Example Usage
+--- Event Planner ---
 1. Add Event
-2. View Events
-3. Edit Event
-4. Delete Event
+2. View All Events
+3. Mark Event Status
+4. Remove Event
 5. Exit
-```
 
-### Example event record
-```json
-{
-  "id": 1,
-  "name": "Math Club Meeting",
-  "date": "2026-05-08",
-  "location": "Room 201",
-  "description": "Prepare contest questions"
-}
-```
+Choose an Option: 1
+Enter Event Name: Meeting
+Enter Event Date: (YYYYMMDD) 20260420
+Upcoming OR Past? (u/p) u
 
-## In the Scope
+Output:
 
-- Add an event.
-- View events sorted by date ascending.
-- Edit an event by ID.
-- Delete an event by ID.
-- Persist all changes in `data/events.json`.
+[Upcoming] Meeting - 2026 / 04 / 20
+Data Storage
 
-## Data Model
+Events are stored in:
 
-Event contract:
-- `id: int`
-- `name: str` (required)
-- `date: str` (required, strict `YYYY-MM-DD`)
-- `location: str` (required)
-- `description: str` (optional, defaults to empty string)
+./data/saved_events.txt
 
-Storage expectations:
-- Runtime data file: `data/events.json`.
-- `data/template.json` is a reference example, not the runtime store.
+Example format:
 
-## Validation Rules
+[
+  {"name": "Meeting", "date": "20260420", "status": True}
+]
+Input Validation
 
-- Required fields: `name`, `date`, `location` must be non-empty.
-- `date` must be strict ISO format `YYYY-MM-DD`.
-- Invalid dates (including impossible calendar dates) are rejected with clear CLI errors.
+The program checks:
 
-## Implementation Checklist
+Name is not empty
+Date is exactly 8 digits (YYYYMMDD)
+Status must be u or p
+Edge Cases
+Empty event name → rejected
+Invalid date format → rejected
+Selecting an event that does not exist → handled with error message
+No events in list → displays "Current No Events."
+Limitations
+Date is stored as a string (no real date validation like leap years)
+Data is stored in a .txt file instead of a database
+No sorting or searching functionality
+Future Improvements
+Add real date validation
+Add event sorting (by date)
+Add search functionality
+Use JSON or database instead of .txt
 
-1. Create JSON storage loader/saver.
-2. Implement CRUD service functions.
-3. Build interactive menu loop.
-4. Add input/date validation.
-5. Add unit tests for core behavior.
-6. Document run/test commands.
-
-## Test Plan
-
-Target scenarios:
-- Add event with valid required fields is saved to JSON.
-- List events is sorted by date ascending.
-- Edit updates only the selected ID.
-- Delete removes only the selected ID.
-- Missing required fields are rejected.
-- Invalid date format or impossible date is rejected.
-- Storage initializes safely when data file is missing or empty.
-
-Planned test command:
-
-```bash
-python -m unittest discover -s test -p "test_*.py"
-```

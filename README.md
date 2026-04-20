@@ -10,80 +10,104 @@ All events are saved to a `.txt` file so they can be loaded again when the progr
 ## How to Run
 
 1. Make sure all files (`main.py`, `event.py`, `storage.py`) are in the same folder  
-2. Run the program using: python main.py
+2. Run the program using: `python main.py`
 
-```bash
+---
 
-Example Input/Output
+## Menu
 
-Menu:
-
+```
 --- Event Planner ---
 1. Add Event
 2. View All Events
 3. Mark Event Status
 4. Remove Event
 5. Exit
+```
 
-Example 1: Add Event
+---
 
-Input:
+## Examples
+
+### Example 1: Add Event
+
+**Input:**
+```
 Choose an Option: 1
 Enter Event Name: Math Test
 Enter Event Date: (YYYYMMDD) 20260508
 Upcoming OR Past? (u/p) u
+```
 
-Example 2: View Events
+### Example 2: View All Events
 
-Input:
+**Input:**
+```
 Choose an Option: 2
+```
 
-Output:
+**Output:**
+```
 1. [Upcoming] Math Test - 2026 / 05 / 08
+```
 
-Example 3: Update Event Status
+### Example 3: Update Event Status
 
-Input:
+**Input:**
+```
 Choose an Option: 3
-Upcoming OR Past? (u/p)p
+Upcoming OR Past? (u/p) p
+```
 
-Output:
+**Output:**
+```
 1. [Upcoming] Math Test - 2026 / 05 / 08
 Enter The event index: 1
 Status Updated.
+```
 
-Example 4: Remove Event
+### Example 4: Remove Event
 
-Input:
+**Input:**
+```
 Choose an Option: 4
 Enter The event index: 1
+```
 
-Output:
+**Output:**
+```
 Event Removed.
+```
 
-Example 5: Invalid Event name
+### Example 5: Invalid Event Name
 
-Input:
+**Input:**
+```
 Choose an Option: 1
-Enter Event Name:
+Enter Event Name: 
+```
 
-Output:
+**Output:**
+```
 Invalid Name. Enter Again.
+```
 
-Example 6: Empty Event List
+### Example 6: Empty Event List
 
-Output:
+**Output:**
+```
 Current No Events.
+```
 
-Example 7: Invalid date
+### Example 7: Invalid Date
 
-Input:
+**Input:**
+```
 Enter Event Name: 1
 Enter Event Date: (YYYYMMDD) 88888888
+```
 
-Output:
+**Output:**
+```
 Invalid date. Enter a real date in YYYYMMDD format.
-
-
-
-
+```

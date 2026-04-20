@@ -12,27 +12,26 @@ All events are saved to a `.txt` file so they can be loaded again when the progr
 1. Make sure all files (`main.py`, `event.py`, `storage.py`) are in the same folder  
 2. Run the program using: python main.py
 
+```bash
 
-## Example Input/Output
+Example Input/Output
 
-## Menu:
+Menu:
 
-## --- Event Planner ---
-`1. Add Event
+--- Event Planner ---
+1. Add Event
 2. View All Events
 3. Mark Event Status
 4. Remove Event
-5. Exit`
----
-## Example input:
+5. Exit
 
-`Choose an Option: 1
+Example input:
+
+Choose an Option: 1
 Enter Event Name: Meeting
 Enter Event Date: (YYYYMMDD) 20260420
-Upcoming OR Past? (u/p) u`
+Upcoming OR Past? (u/p) u
 
-## Example output:
+Example output:
 
-`[Upcoming] Meeting - 2026 / 04 / 20`
-
-```bash
+[Upcoming] Meeting - 2026 / 04 / 20

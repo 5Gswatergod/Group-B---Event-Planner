@@ -16,7 +16,8 @@ from ast import literal_eval
 
 from event import Event
 
-FILE_PATH = "./data/saved_events.txt"
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+FILE_PATH = os.path.join(PROJECT_ROOT, "data", "saved_events.txt")
 
 def eventToDict(events: list[Event]) -> list[dict]:
     """

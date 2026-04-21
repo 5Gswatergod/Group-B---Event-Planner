@@ -12,11 +12,16 @@ Date: 2026-04-15
 
 import os
 from datetime import datetime
+import sys
 
 from event import Event
-from storage import save_event, load_event, eventToDict
+from storage import FILE_PATH, save_event, load_event, eventToDict
+    
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+SRC_DIR = os.path.join(PROJECT_ROOT, "src")
 
-FILE_PATH = "./data/saved_events.txt"
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
 
 def display_list(events: list[Event]) -> None:
     """Print the current event list in a numbered format."""
@@ -75,6 +80,7 @@ def get_valid_status() -> bool:
 def main() -> None:
     # Create the data file if it does not exist.
     if not os.path.exists(FILE_PATH):
+        os.makedirs(os.path.dirname(FILE_PATH), exist_ok=True)
         open(FILE_PATH, "w").close()
 
     # Load saved events from file and convert each dict to an Event object.

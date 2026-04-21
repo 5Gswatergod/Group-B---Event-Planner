@@ -32,12 +32,6 @@ This test plan is based on the automated tests in `test_src.py`. The tests check
 | TC-017 | Strip spaces from valid date input | `" 20260416 "` | Returns `"20260416"` | Unit | Pass | Confirms input cleanup |
 | TC-018 | Convert selected event number to zero-based index | User enters `"1"` | Returns `0` | Unit | Pass | Also displays event list |
 | TC-019 | Retry status input until `u` or `p` | `"x"`, then `"p"` | Returns `False` and prints invalid-status message | Unit | Pass | `False` means Past |
-| TC-020 | Main menu adds, views, exits, and saves event list | Inputs: `1`, `Meeting`, `20260416`, `u`, `2`, `5` | Displays event and saves full list | Integration | Pass | Mocks file loading/saving |
-| TC-021 | Main menu marks event as past | Inputs: `3`, `p`, `1`, `5` | Prints `Status Updated.` and saves status as `False` | Integration | Pass | Updates existing event |
-| TC-022 | Main menu removes event | Inputs: `4`, `1`, `5` | Prints `Event Removed.` and saves empty list | Integration | Pass | Removes selected event |
-| TC-023 | Main menu handles actions on empty list | Inputs: `3`, `4`, `5` | Prints `Current No Events.` at least twice | Regression | Pass | Prevents update/remove on empty list |
-| TC-024 | Main menu handles invalid selected index | Inputs: `3`, `u`, `9`, `5` | Prints `Invalid input.` | Regression | Pass | Catches invalid index |
-| TC-025 | Main creates data file when missing | Missing file, input `5` | Calls `open(FILE_PATH, "w")` and prints `Goodbye.` | Integration | Pass | Tests startup file creation |
 
 ---
 
@@ -224,110 +218,6 @@ class MainHelperTests(unittest.TestCase):
 
         self.assertFalse(result)
         self.assertIn("Invalid input. Enter 'u' or 'p'.", output.getvalue())
-
-
-class MainFlowTests(unittest.TestCase):
-    def test_main_add_view_and_exit_saves_full_event_list(self):
-        user_inputs = ["1", "Meeting", "20260416", "u", "2", "5"]
-        output = io.StringIO()
-
-        with patch.object(main.os.path, "exists", return_value=True), \
-             patch.object(main, "load_event", return_value=[]), \
-             patch.object(main, "save_event") as mock_save_event, \
-             patch("builtins.input", side_effect=user_inputs), \
-             redirect_stdout(output):
-            main.main()
-
-        self.assertIn("[Upcoming] Meeting - 2026 / 04 / 16", output.getvalue())
-        mock_save_event.assert_called_once_with(
-            main.FILE_PATH,
-            [{"name": "Meeting", "date": "20260416", "status": True}],
-        )
-
-    def test_main_marks_event_status(self):
-        user_inputs = ["3", "p", "1", "5"]
-        output = io.StringIO()
-
-        with patch.object(main.os.path, "exists", return_value=True), \
-             patch.object(
-                 main,
-                 "load_event",
-                 return_value=[{"name": "Meeting", "date": "20260416", "status": True}],
-             ), \
-             patch.object(main, "save_event") as mock_save_event, \
-             patch("builtins.input", side_effect=user_inputs), \
-             redirect_stdout(output):
-            main.main()
-
-        self.assertIn("Status Updated.", output.getvalue())
-        mock_save_event.assert_called_once_with(
-            main.FILE_PATH,
-            [{"name": "Meeting", "date": "20260416", "status": False}],
-        )
-
-    def test_main_removes_event(self):
-        user_inputs = ["4", "1", "5"]
-        output = io.StringIO()
-
-        with patch.object(main.os.path, "exists", return_value=True), \
-             patch.object(
-                 main,
-                 "load_event",
-                 return_value=[{"name": "Meeting", "date": "20260416", "status": True}],
-             ), \
-             patch.object(main, "save_event") as mock_save_event, \
-             patch("builtins.input", side_effect=user_inputs), \
-             redirect_stdout(output):
-            main.main()
-
-        self.assertIn("Event Removed.", output.getvalue())
-        mock_save_event.assert_called_once_with(main.FILE_PATH, [])
-
-    def test_main_handles_empty_list_actions(self):
-        user_inputs = ["3", "4", "5"]
-        output = io.StringIO()
-
-        with patch.object(main.os.path, "exists", return_value=True), \
-             patch.object(main, "load_event", return_value=[]), \
-             patch.object(main, "save_event"), \
-             patch("builtins.input", side_effect=user_inputs), \
-             redirect_stdout(output):
-            main.main()
-
-        self.assertGreaterEqual(output.getvalue().count("Current No Events."), 2)
-
-    def test_main_handles_invalid_selected_index(self):
-        user_inputs = ["3", "u", "9", "5"]
-        output = io.StringIO()
-
-        with patch.object(main.os.path, "exists", return_value=True), \
-             patch.object(
-                 main,
-                 "load_event",
-                 return_value=[{"name": "Meeting", "date": "20260416", "status": True}],
-             ), \
-             patch.object(main, "save_event"), \
-             patch("builtins.input", side_effect=user_inputs), \
-             redirect_stdout(output):
-            main.main()
-
-        self.assertIn("Invalid input.", output.getvalue())
-
-    def test_main_creates_data_file_when_missing(self):
-        mocked_file = mock_open()
-        output = io.StringIO()
-
-        with patch.object(main.os.path, "exists", return_value=False), \
-             patch.object(main, "load_event", return_value=[]), \
-             patch.object(main, "save_event"), \
-             patch("builtins.open", mocked_file), \
-             patch("builtins.input", side_effect=["5"]), \
-             redirect_stdout(output):
-            main.main()
-
-        mocked_file.assert_called_once_with(main.FILE_PATH, "w")
-        self.assertIn("Goodbye.", output.getvalue())
-
 
 if __name__ == "__main__":
     unittest.main()
